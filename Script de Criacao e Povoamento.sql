@@ -293,6 +293,45 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `BDTur`.`Local`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `BDTur`;
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (101, 'Rua', 'Rua Jornalista Barreto', '274', 'Centro', '62011-172', 'Em frente ao Museu Dom José');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (102, 'Rua', 'Rua Margem Esquerda', '1', 'Centro', '62128-030', 'Margem Esquerda');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (103, 'Rua', 'Rua Dona Maria Tomasia', '355', 'Boulevard do Arco', '62011-230', 'Boulevard do Arco');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (104, 'Avenida', 'Av. Atlântica', '1702', 'Copacabana', '22021-001', 'Praia de Copacabana');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (105, 'Avenida', 'Av. Bartolomeu Mitre', '385', 'Leblon', '22431-003', 'Praia do Leblon');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (106, 'Rua', 'Rua República da Armênia', '1154', 'Parque Manibum', '60831-760', 'Zona Sul');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (107, 'Avenida', 'Av. José Aluísio Pinto', '300', 'Dom Expedito', '62050-255', 'Ao lado Shopping Sobral');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (108, 'Avenida', 'Av. Beira-Mar', '3130', 'Meirelles', '60165-211', 'Beira-Mar');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (109, 'Avenida', 'Av. Zé Diogo', '4945', 'Praia do Futuro', '60180-005', 'Praia do Futuro');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (110, 'Rua', 'Rua Dona Maria Tomásia', '375', 'Santa Rita', '62011-230', 'Próximo ao Posto');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (111, 'Praça', 'Cidade do Rock', '1', 'Parque Olímpico', '22030-081', 'Parque Olímpico');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (112, 'Avenida', 'Av. Almirante Josegua', '386', 'Dona Monica', '62011-172', 'Ao lado da Praça Santa Quitéria');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (201, 'Rua', 'Rua Visconde de Mauá', '185', 'Meireles', '60125-160', 'Próximo ao Shopping Parangaba');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (202, 'Rua', 'Rua Duputado João Adeodato', '721', 'Centro', '62010-467', 'Próximo a Rodoviária');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (203, 'Rua', 'Rua Duputado João Adeodato', '619', 'Centro', '62010-450', 'Rua Duputado João Adeodato');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (204, 'Avenida', 'Av. José Aluísio Pinto', '300', 'Dom Expedito', '62050-255', 'Ao lado Shopping Sobral');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (205, 'Avenida', 'Av. Atlântica', '1702', 'Copacabana', '22021-001', 'Praia de Copacabana');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (206, 'Rua', 'Rua Tapirá', '284', 'Centro', '13320-030', 'Próxima a Igreja das Dores');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (207, 'Avenida', 'Av. Almirante Barroso', '885', 'Centro', '60741-900', 'Praia de Iracema ');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (208, 'Avenida', 'Av. Bartolomeu Mitre', '385', 'Leblon', '22431-003', 'Praia do Leblon');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (209, 'Rua', 'Rua Praça da Sé', '22', 'Centro', '20020-210', 'Praça da Sé');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (210, 'Avenida', 'Av. Beira-Mar', '3130', 'Meirelles', '60165-211', 'Beira-Mar');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (501, 'Rua', 'Dona Maria Tomásia', '375', 'Santa Rita', '62011-230', 'Próximo ao Posto');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (502, 'Avenida', 'Almirante Josegua', '386', 'Dona Monica', '62011-172', 'Ao lado da Praça Santa Quitéria');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (503, 'Praça', 'Cidade do Rock', '1', 'Parque Olímpico', '22030-081', 'Parque Olímpico');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (504, 'Avenida', 'Dom José', '878', 'Centro', '62015-400', 'Próximo ao Teatro São João');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (505, 'Praça', 'Mauá', '1', 'Centro', '20081-262', 'Praça Mauá');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (506, 'Rua', 'Dragão do Mar', '81', 'Centro', '60060-172', 'Dragão do Mar');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (507, 'Rua', 'Galdino Goldin', '52', 'Centro', '62010-180', 'Em frente a camara dos vereadores');
+INSERT INTO `BDTur`.`Local` (`ID`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (509, 'Praça', 'da Sé', '1', 'Centro', '60055-150', 'Praça da Sé');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `BDTur`.`Restaurante`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -307,8 +346,8 @@ INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidad
 INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (108, 'Beira-Mar Restaurant', 'Super-Luxo', 02);
 INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (109, 'Chico do Carangueijo', 'Simples', 02);
 INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (110, 'Sobrado335 Restaurant', 'Luxo', 01);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (111, 'Rock in Rio', 'Super-Luxo', 03);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (112, 'Lancelot', 'Luxo', 02);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (111, 'Rock in Rio Restaurant', 'Super-Luxo', 03);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (112, 'Lancelot Restaurant', 'Luxo', 02);
 
 COMMIT;
 
@@ -396,15 +435,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (501, 'Sobrado335', NULL, '88 99625-7682', 'c', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (502, 'Lancelot', NULL, '85 99901-0413', 'c', 02);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (503, 'Rock in Rio', NULL, '21 2233-5379', 'c', 03);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (504, 'Museu Dom José', NULL, '88 3611-3525', 'm', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (505, 'Museu do Amanhã', NULL, '21 2233-0721', 'm', 03);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (506, 'Museu Dragão do Mar', NULL, '85 3488-8600', 'm', 02);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (507, 'Igreja da Sé', NULL, '88 3611-0848', 'i', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (508, 'Igreja da Candelaria', NULL, '21 2233-2324', 'i', 03);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (509, 'Catedral Metropolitana de Fortaleza', NULL, '85 3231-4196', 'i', 02);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (501, 'Sobrado335', 'Bar', '88 99625-7682', 'Casa_de_Show', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (502, 'Lancelot', 'Bar', '85 99901-0413', 'Casa_de_Show', 02);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (503, 'Rock in Rio', 'Espaço Cultural', '21 2233-5379', 'Casa_de_Show', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (504, 'Museu Dom José', 'Cultura', '88 3611-3525', 'Museu', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (505, 'Museu do Amanhã', 'Cultura', '21 2233-0721', 'Museu', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (506, 'Museu Dragão do Mar', 'Cultura', '85 3488-8600', 'Museu', 02);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (507, 'Igreja da Sé', 'Cultura', '88 3611-0848', 'Igreja', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (508, 'Igreja da Candelaria', 'Cultura', '21 2233-2324', 'Igreja', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (509, 'Catedral Metropolitana de Fortaleza', 'Cultura', '85 3231-4196', 'Igreja', 02);
 
 COMMIT;
 
