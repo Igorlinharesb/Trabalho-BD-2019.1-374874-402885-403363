@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS `BDTur`.`Endereco` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Endereco` (
   `ID_Endereco` INT(6) NOT NULL,
-  `Tipo_Logradouro` VARCHAR(20) NOT NULL,
+  `Tipo_Logradouro` ENUM('Rua', 'Avenida', 'Praça', 'Travessa') NOT NULL,
   `Nome` VARCHAR(45) NOT NULL,
   `Numero` VARCHAR(45) NOT NULL,
   `Bairro` VARCHAR(45) NOT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Ponto_Turistico` (
   `Nome` VARCHAR(45) NOT NULL,
   `Descricao` VARCHAR(140) NULL,
   `Tefelone` VARCHAR(14) NULL,
-  `Tipo` VARCHAR(45) NOT NULL,
+  `Tipo` ENUM('Igreja', 'Museu', 'Casa de Show') NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
   PRIMARY KEY (`ID_PT`),
   INDEX `fk_Pontos_Turisticos_Cidade1_idx` (`Cidade_ID` ASC) VISIBLE,
@@ -196,7 +196,7 @@ DROP TABLE IF EXISTS `BDTur`.`Casa_de_Show` ;
 CREATE TABLE IF NOT EXISTS `BDTur`.`Casa_de_Show` (
   `PT_ID` INT(6) NOT NULL,
   `Horario_Inicio` VARCHAR(8) NOT NULL,
-  `Dia_de_Fechamento` VARCHAR(45) BINARY NOT NULL,
+  `Dia_de_Fechamento` ENUM('Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado', 'Domingo') NOT NULL,
   `Preco_Medio_Rest` DECIMAL(6,2) NULL,
   `Especialidade_Rest` VARCHAR(45) NULL,
   `Restaurante_ID` INT(6) NULL,
@@ -327,6 +327,7 @@ INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `Tipo_Logradouro`, `Nome`, `Numer
 INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (506, 'Rua', 'Dragão do Mar', '81', 'Centro', '60060-172', 'Dragão do Mar');
 INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (507, 'Rua', 'Galdino Goldin', '52', 'Centro', '62010-180', 'Em frente a camara dos vereadores');
 INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (509, 'Praça', 'da Sé', '1', 'Centro', '60055-150', 'Praça da Sé');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `Tipo_Logradouro`, `Nome`, `Numero`, `Bairro`, `CEP`, `Complemento`) VALUES (508, 'Praça', 'da Candelária', '1', 'Candelária', '20829-920', ' -');
 
 COMMIT;
 
@@ -435,9 +436,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (501, 'Sobrado335', 'Bar', '88 99625-7682', 'Casa_de_Show', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (502, 'Lancelot', 'Bar', '85 99901-0413', 'Casa_de_Show', 02);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (503, 'Rock in Rio', 'Espaço Cultural', '21 2233-5379', 'Casa_de_Show', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (501, 'Sobrado335', 'Bar', '88 99625-7682', 'Casa de Show', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (502, 'Lancelot', 'Bar', '85 99901-0413', 'Casa de Show', 02);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (503, 'Rock in Rio', 'Espaço Cultural', '21 2233-5379', 'Casa de Show', 03);
 INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (504, 'Museu Dom José', 'Cultura', '88 3611-3525', 'Museu', 01);
 INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (505, 'Museu do Amanhã', 'Cultura', '21 2233-0721', 'Museu', 03);
 INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome`, `Descricao`, `Tefelone`, `Tipo`, `Cidade_ID`) VALUES (506, 'Museu Dragão do Mar', 'Cultura', '85 3488-8600', 'Museu', 02);
