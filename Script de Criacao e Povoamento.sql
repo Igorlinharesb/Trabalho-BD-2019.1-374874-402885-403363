@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Restaurante` (
   `Nome` VARCHAR(45) NOT NULL,
   `Categoria` VARCHAR(10) NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
-  INDEX `fk_Restaurante_Cidade1_idx` (`Cidade_ID` ASC) VISIBLE,
+  INDEX `fk_Restaurante_Cidade1_idx` (`Cidade_ID` ASC),
+  PRIMARY KEY (`ID_Restaurante`),
   CONSTRAINT `fk_Restaurante_Endereco1`
     FOREIGN KEY (`ID_Restaurante`)
     REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
@@ -82,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Hotel` (
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
   `Restaurante_ID` INT(6) NULL,
   PRIMARY KEY (`ID_Hotel`),
-  INDEX `fk_Hotel_Cidade1_idx` (`Cidade_ID` ASC) VISIBLE,
-  INDEX `fk_Hotel_Restaurante1_idx` (`Restaurante_ID` ASC) VISIBLE,
+  INDEX `fk_Hotel_Cidade1_idx` (`Cidade_ID` ASC) ,
+  INDEX `fk_Hotel_Restaurante1_idx` (`Restaurante_ID` ASC) ,
   CONSTRAINT `fk_Hotel_Endereco`
     FOREIGN KEY (`ID_Hotel`)
     REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
@@ -113,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Quarto` (
   `Tipo` VARCHAR(10) NOT NULL,
   `Hotel_ID` INT NOT NULL,
   PRIMARY KEY (`Numero`, `Hotel_ID`),
-  INDEX `fk_Quarto_Hotel1_idx` (`Hotel_ID` ASC) VISIBLE,
+  INDEX `fk_Quarto_Hotel1_idx` (`Hotel_ID` ASC),
   CONSTRAINT `fk_Quarto_Hotel1`
     FOREIGN KEY (`Hotel_ID`)
     REFERENCES `BDTur`.`Hotel` (`ID_Hotel`)
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Ponto_Turistico` (
   `Tipo` ENUM('Igreja', 'Museu', 'Casa de Show') NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
   PRIMARY KEY (`ID_PT`),
-  INDEX `fk_Pontos_Turisticos_Cidade1_idx` (`Cidade_ID` ASC) VISIBLE,
+  INDEX `fk_Pontos_Turisticos_Cidade1_idx` (`Cidade_ID` ASC) ,
   CONSTRAINT `fk_Pontos_Turisticos_Endereco1`
     FOREIGN KEY (`ID_PT`)
     REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
@@ -158,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Igreja` (
   `PT_ID` INT(6) NOT NULL,
   `Data_Funcadacao` DATE NOT NULL,
   `Estilo` VARCHAR(45) NOT NULL,
-  INDEX `fk_Igreja_Ponto_Turistico1_idx` (`PT_ID` ASC) VISIBLE,
+  INDEX `fk_Igreja_Ponto_Turistico1_idx` (`PT_ID` ASC) ,
   PRIMARY KEY (`PT_ID`),
   CONSTRAINT `fk_Igreja_Ponto_Turistico1`
     FOREIGN KEY (`PT_ID`)
@@ -178,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Museu` (
   `Data_Fundacao` DATE NOT NULL,
   `Entrada` DECIMAL(6,2) NOT NULL,
   `Qtde_Salas` INT(3) NOT NULL,
-  INDEX `fk_Museu_Pontos_Turisticos1_idx` (`PT_ID` ASC) VISIBLE,
+  INDEX `fk_Museu_Pontos_Turisticos1_idx` (`PT_ID` ASC) ,
   PRIMARY KEY (`PT_ID`),
   CONSTRAINT `fk_Museu_Pontos_Turisticos1`
     FOREIGN KEY (`PT_ID`)
@@ -200,9 +201,9 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Casa_de_Show` (
   `Preco_Medio_Rest` DECIMAL(6,2) NULL,
   `Especialidade_Rest` VARCHAR(45) NULL,
   `Restaurante_ID` INT(6) NULL,
-  INDEX `fk_Casa_de_Show_Pontos_Turisticos1_idx` (`PT_ID` ASC) VISIBLE,
+  INDEX `fk_Casa_de_Show_Pontos_Turisticos1_idx` (`PT_ID` ASC) ,
   PRIMARY KEY (`PT_ID`),
-  INDEX `fk_Casa_de_Show_Restaurante1_idx` (`Restaurante_ID` ASC) VISIBLE,
+  INDEX `fk_Casa_de_Show_Restaurante1_idx` (`Restaurante_ID` ASC),
   CONSTRAINT `fk_Casa_de_Show_Pontos_Turisticos1`
     FOREIGN KEY (`PT_ID`)
     REFERENCES `BDTur`.`Ponto_Turistico` (`ID_PT`)
@@ -241,8 +242,8 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Museu_has_Fundador` (
   `Museu_ID` INT(6) NOT NULL,
   `Fundador_ID` INT(6) NOT NULL,
   PRIMARY KEY (`Museu_ID`, `Fundador_ID`),
-  INDEX `fk_Museu_has_Fundador_Fundador1_idx` (`Fundador_ID` ASC) VISIBLE,
-  INDEX `fk_Museu_has_Fundador_Museu1_idx` (`Museu_ID` ASC) VISIBLE,
+  INDEX `fk_Museu_has_Fundador_Fundador1_idx` (`Fundador_ID` ASC) ,
+  INDEX `fk_Museu_has_Fundador_Museu1_idx` (`Museu_ID` ASC) ,
   CONSTRAINT `fk_Museu_has_Fundador_Museu1`
     FOREIGN KEY (`Museu_ID`)
     REFERENCES `BDTur`.`Museu` (`PT_ID`)
@@ -265,8 +266,8 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Igreja_has_Fundador` (
   `Igreja_ID` INT(6) NOT NULL,
   `Fundador_ID` INT(6) NOT NULL,
   PRIMARY KEY (`Igreja_ID`, `Fundador_ID`),
-  INDEX `fk_Igreja_has_Fundador_Fundador1_idx` (`Fundador_ID` ASC) VISIBLE,
-  INDEX `fk_Igreja_has_Fundador_Igreja1_idx` (`Igreja_ID` ASC) VISIBLE,
+  INDEX `fk_Igreja_has_Fundador_Fundador1_idx` (`Fundador_ID` ASC) ,
+  INDEX `fk_Igreja_has_Fundador_Igreja1_idx` (`Igreja_ID` ASC) ,
   CONSTRAINT `fk_Igreja_has_Fundador_Igreja1`
     FOREIGN KEY (`Igreja_ID`)
     REFERENCES `BDTur`.`Igreja` (`PT_ID`)
