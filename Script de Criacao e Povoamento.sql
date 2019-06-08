@@ -21,7 +21,7 @@ USE `BDTur` ;
 DROP TABLE IF EXISTS `BDTur`.`Cidade` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Cidade` (
-  `ID_Cidade` INT(6) UNSIGNED NOT NULL,
+  `ID_Cidade` INT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NOT NULL,
   `UF` VARCHAR(2) NOT NULL,
   `Populacao` INT(10) UNSIGNED NOT NULL,
@@ -52,12 +52,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BDTur`.`Restaurante` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Restaurante` (
-  `ID_Restaurante` INT(6) NOT NULL,
+  `ID_Restaurante` INT(6) NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NOT NULL,
   `Categoria` VARCHAR(10) NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
+  `Restaurantecol` VARCHAR(45) NULL,
   INDEX `fk_Restaurante_Cidade1_idx` (`Cidade_ID` ASC),
   PRIMARY KEY (`ID_Restaurante`),
+  UNIQUE INDEX `Restaurantecol_UNIQUE` (`Restaurantecol` ASC) ,
   CONSTRAINT `fk_Restaurante_Endereco1`
     FOREIGN KEY (`ID_Restaurante`)
     REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
@@ -77,7 +79,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BDTur`.`Hotel` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Hotel` (
-  `ID_Hotel` INT(6) NOT NULL,
+  `ID_Hotel` INT(6) NOT NULL AUTO_INCREMENT,
   `Nome_Hotel` VARCHAR(45) NOT NULL,
   `Categoria` INT(1) NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
@@ -114,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Quarto` (
   `Tipo` VARCHAR(10) NOT NULL,
   `Hotel_ID` INT NOT NULL,
   PRIMARY KEY (`Numero`, `Hotel_ID`),
-  INDEX `fk_Quarto_Hotel1_idx` (`Hotel_ID` ASC),
+  INDEX `fk_Quarto_Hotel1_idx` (`Hotel_ID` ASC) ,
   CONSTRAINT `fk_Quarto_Hotel1`
     FOREIGN KEY (`Hotel_ID`)
     REFERENCES `BDTur`.`Hotel` (`ID_Hotel`)
@@ -129,7 +131,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BDTur`.`Ponto_Turistico` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Ponto_Turistico` (
-  `ID_PT` INT(6) NOT NULL,
+  `ID_PT` INT(6) NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NOT NULL,
   `Descricao` VARCHAR(140) NULL,
   `Tefelone` VARCHAR(14) NULL,
@@ -203,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Casa_de_Show` (
   `Restaurante_ID` INT(6) NULL,
   INDEX `fk_Casa_de_Show_Pontos_Turisticos1_idx` (`PT_ID` ASC) ,
   PRIMARY KEY (`PT_ID`),
-  INDEX `fk_Casa_de_Show_Restaurante1_idx` (`Restaurante_ID` ASC),
+  INDEX `fk_Casa_de_Show_Restaurante1_idx` (`Restaurante_ID` ASC) ,
   CONSTRAINT `fk_Casa_de_Show_Pontos_Turisticos1`
     FOREIGN KEY (`PT_ID`)
     REFERENCES `BDTur`.`Ponto_Turistico` (`ID_PT`)
@@ -223,7 +225,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BDTur`.`Fundador` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Fundador` (
-  `ID` INT(6) NOT NULL,
+  `ID` INT(6) NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NOT NULL,
   `DN` DATE NOT NULL,
   `Morte` DATE NULL,
@@ -338,18 +340,18 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (101, 'Cicero\'s', 'Super-Luxo', 01);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (102, 'Delicia.com', 'Simples', 01);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (103, 'Tako Sushi', 'Luxo', 01);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (104, 'Copacabana Restaurant', 'Super-Luxo', 03);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (105, 'Leblon Restaurant', 'Super-Luxo', 03);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (106, 'Coco Bambu', 'Super-Luxo', 02);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (107, 'Tullip Inn Restaurant', 'Super-Luxo', 01);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (108, 'Beira-Mar Restaurant', 'Super-Luxo', 02);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (109, 'Chico do Carangueijo', 'Simples', 02);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (110, 'Sobrado335 Restaurant', 'Luxo', 01);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (111, 'Rock in Rio Restaurant', 'Super-Luxo', 03);
-INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`) VALUES (112, 'Lancelot Restaurant', 'Luxo', 02);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (101, 'Cicero\'s', 'Super-Luxo', 01, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (102, 'Delicia.com', 'Simples', 01, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (103, 'Tako Sushi', 'Luxo', 01, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (104, 'Copacabana Restaurant', 'Super-Luxo', 03, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (105, 'Leblon Restaurant', 'Super-Luxo', 03, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (106, 'Coco Bambu', 'Super-Luxo', 02, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (107, 'Tullip Inn Restaurant', 'Super-Luxo', 01, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (108, 'Beira-Mar Restaurant', 'Super-Luxo', 02, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (109, 'Chico do Carangueijo', 'Simples', 02, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (110, 'Sobrado335 Restaurant', 'Luxo', 01, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (111, 'Rock in Rio Restaurant', 'Super-Luxo', 03, NULL);
+INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome`, `Categoria`, `Cidade_ID`, `Restaurantecol`) VALUES (112, 'Lancelot Restaurant', 'Luxo', 02, NULL);
 
 COMMIT;
 
