@@ -22,9 +22,9 @@ public class CidadeDAOTest {
     public void Inserir() {
         Cidade cidade = new Cidade ("Belém","PA", 2478746);
         CidadeDAO dao = new CidadeDAO();
-        dao.inserir (cidade);
+        dao.createCidade (cidade);
         
-        if(dao.inserir(cidade)){
+        if(dao.createCidade(cidade)){
             System.out.println("Cidade armazenada com sucesso!");
         } else{
                 fail("Falha ao Salvar! ");

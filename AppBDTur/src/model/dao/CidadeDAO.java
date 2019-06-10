@@ -9,6 +9,8 @@ import Connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.bean.Cidade;
 /**
  *
@@ -19,15 +21,14 @@ public class CidadeDAO {
     private Connection con = null;
 
     public CidadeDAO() {
-        try {
+        try {      
             con = ConnectionFactory.getConnection();
         } catch (SQLException ex) {
-            System.err.println("Erro de Conexão: "+ex);
+            System.err.println("Erro ao conectar com o Banco de Dados: "+ex);
         }
-      
     }
     
-    public boolean inserir (Cidade cidade){
+    public boolean createCidade (Cidade cidade){
         String sql1 = "INSERT INTO cidade (nome, UF, populacao) VALUES (?,?,?)";
         PreparedStatement stmt = null;
         try {
