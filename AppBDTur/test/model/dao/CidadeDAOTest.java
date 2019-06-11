@@ -20,14 +20,14 @@ public class CidadeDAOTest {
 
     @Test
     public void Inserir() {
-        Cidade cidade = new Cidade ("Belém","PA", 2478746);
+        Cidade cidade = new Cidade ("Recife","PE", 2019210);
         CidadeDAO dao = new CidadeDAO();
         dao.createCidade (cidade);
         
         if(dao.createCidade(cidade)){
             System.out.println("Cidade armazenada com sucesso!");
         } else{
-                fail("Falha ao Salvar! ");
+                fail("Falha ao Salvar cidade! ");
         }
     }
 }

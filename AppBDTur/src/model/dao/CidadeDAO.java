@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.bean.Cidade;
 /**
  *
@@ -29,17 +30,19 @@ public class CidadeDAO {
     }
     
     public boolean createCidade (Cidade cidade){
-        String sql1 = "INSERT INTO cidade (nome, UF, populacao) VALUES (?,?,?)";
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement(sql1);
+            stmt = con.prepareStatement("INSERT INTO cidade (nome, UF, populacao) VALUES (?,?,?)");
             stmt.setString(1, cidade.getNome_cidade());
             stmt.setString(2, cidade.getUF());
             stmt.setInt(3, cidade.getPopulacao());
+            
             stmt.executeUpdate();
+            
+            JOptionPane.showConfirmDialog(null, "Cidade armazenada com Sucesso!");
             return true;
         } catch (SQLException ex) {
-            System.err.println("ERRO: "+ex);
+            JOptionPane.showConfirmDialog(null, "Erro ao armazenar cidade: "+ex);
             return false;
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
