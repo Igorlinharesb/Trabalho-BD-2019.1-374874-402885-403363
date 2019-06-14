@@ -10,29 +10,27 @@ package model.bean;
  * @author IgorL
  */
 public class Hotel {
+
     private int id_hotel;
     private String nome_hotel;
     private int categoria;
     private Cidade cidade;
     private Restaurante restaurante;
-    private Endereco endereco;
 
     public Hotel() {
     }
 
-    public Hotel(String nome_hotel, int categoria, Cidade cidade, Endereco endereco) {
+    public Hotel(String nome_hotel, int categoria, Cidade cidade) {
         this.nome_hotel = nome_hotel;
         this.categoria = categoria;
         this.cidade = cidade;
-        this.endereco = endereco;
     }
 
-    public Hotel(String nome_hotel, int categoria, Cidade cidade, Restaurante restaurante, Endereco endereco) {
+    public Hotel(String nome_hotel, int categoria, Cidade cidade, Restaurante restaurante) {
         this.nome_hotel = nome_hotel;
         this.categoria = categoria;
         this.cidade = cidade;
         this.restaurante = restaurante;
-        this.endereco = endereco;
     }
 
     public int getId_hotel() {
@@ -74,14 +72,4 @@ public class Hotel {
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
     }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    
 }

@@ -10,24 +10,23 @@ package model.bean;
  * @author IgorL
  */
 public class Ponto_Turistico {
+
     private int id_pt;
     private String nome_pt;
     private String descricao;
     private String telefone;
     private String tipo_pt;
     private Cidade cidade;
-    private Endereco endereco;
 
     public Ponto_Turistico() {
     }
 
-    public Ponto_Turistico(String nome_pt, String descricao, String telefone, String tipo_pt, Cidade cidade, Endereco endereco) {
+    public Ponto_Turistico(String nome_pt, String descricao, String telefone, String tipo_pt, Cidade cidade) {
         this.nome_pt = nome_pt;
         this.descricao = descricao;
         this.telefone = telefone;
         this.tipo_pt = tipo_pt;
         this.cidade = cidade;
-        this.endereco = endereco;
     }
 
     public int getId_pt() {
@@ -78,12 +77,4 @@ public class Ponto_Turistico {
         this.cidade = cidade;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-       
 }

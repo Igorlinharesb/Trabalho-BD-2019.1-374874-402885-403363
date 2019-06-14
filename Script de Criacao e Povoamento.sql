@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Hotel` (
   `Nome_Hotel` VARCHAR(45) NOT NULL,
   `Categoria_Hotel` INT(1) NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
-  `Restaurante_ID` INT(6) NULL,
+  `Restaurante_ID` INT(6) NOT NULL,
   PRIMARY KEY (`ID_Hotel`),
   INDEX `fk_Hotel_Cidade1_idx` (`Cidade_ID` ASC) ,
   INDEX `fk_Hotel_Restaurante1_idx` (`Restaurante_ID` ASC) ,
@@ -320,15 +320,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (201, 'Visconti', 3, 01, NULL);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (202, 'Beira-Rio', 4, 01, NULL);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (203, 'Hugo Plaza', 2, 01, NULL);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (201, 'Visconti', 3, 01, 100);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (202, 'Beira-Rio', 4, 01, 100);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (203, 'Hugo Plaza', 2, 01, 100);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (204, 'Tulipp Inn', 5, 01, 107);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (205, 'Copacabana Palace', 5, 03, 104);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (206, 'Casa da Tia', 2, 02, NULL);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (207, 'Iracema', 4, 02, NULL);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (206, 'Casa da Tia', 2, 02, 100);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (207, 'Iracema', 4, 02, 100);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (208, 'Leblon Palace', 5, 03, 105);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (209, 'Meu Cantinho Pelourinho', 3, 03, NULL);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (209, 'Meu Cantinho Pelourinho', 3, 03, 100);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (210, 'Beira-Mar Hotel', 4, 02, 108);
 
 COMMIT;

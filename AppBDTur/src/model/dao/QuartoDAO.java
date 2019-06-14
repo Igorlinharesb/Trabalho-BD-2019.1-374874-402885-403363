@@ -10,41 +10,44 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.bean.Cidade;
+import model.bean.Quarto;
+
 /**
  *
- * @author Laboratório 7
+ * @author IgorL
  */
-public class CidadeDAO {
-    
+public class QuartoDAO {
+
     private Connection con = null;
 
-    public CidadeDAO() {
-        try {      
+    public QuartoDAO() {
+        try {
             con = ConnectionFactory.getConnection();
         } catch (SQLException ex) {
-            System.err.println("Erro ao conectar com o Banco de Dados: "+ex);
+            System.err.println("Erro ao conectar com o Banco de Dados: " + ex);
         }
     }
-    
-    public boolean createCidade (Cidade cidade){
+
+    public boolean createQuarto(Quarto quarto) {
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("INSERT INTO cidade (nome_cidade, UF, populacao) VALUES (?,?,?)");
-            stmt.setString(1, cidade.getNome_cidade());
-            stmt.setString(2, cidade.getUF());
-            stmt.setInt(3, cidade.getPopulacao());
-            
+            stmt = con.prepareStatement("INSERT INTO quarto (numero_quarto, valor, tipo, hotel_id) VALUES (?,?,?,?)");
+            stmt.setInt(1, quarto.getNumero_quarto());
+            stmt.setFloat(2, quarto.getValor());
+            stmt.setString(3, quarto.getTipo());
+            stmt.setInt(4, quarto.getHotel().getId_hotel());
+
             stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Cidade cadastrada com Sucesso!");
+
+            JOptionPane.showMessageDialog(null, "Quarto cadastrada com Sucesso!");
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao armazenar cidade: "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar quartp: " + ex);
             return false;
-        } finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
+
     }
+
 }

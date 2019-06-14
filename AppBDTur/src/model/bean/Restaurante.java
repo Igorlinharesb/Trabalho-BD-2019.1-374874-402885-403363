@@ -10,20 +10,19 @@ package model.bean;
  * @author IgorL
  */
 public class Restaurante {
+
     private int id_restaurante;
     private String nome_restaurante;
     private String categoria;
     private Cidade cidade;
-    private Endereco endereco;
 
     public Restaurante() {
     }
 
-    public Restaurante(String nome_restaurante, String categoria, Cidade cidade, Endereco endereco) {
+    public Restaurante(String nome_restaurante, String categoria, Cidade cidade) {
         this.nome_restaurante = nome_restaurante;
         this.categoria = categoria;
         this.cidade = cidade;
-        this.endereco = endereco;
     }
 
     public int getId_restaurante() {
@@ -58,14 +57,4 @@ public class Restaurante {
         this.cidade = cidade;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-    
-    
-    
 }

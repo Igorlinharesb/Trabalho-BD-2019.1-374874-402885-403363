@@ -32,20 +32,20 @@ public class HotelDAO {
     
   
     public boolean createHotel(Hotel hotel, Endereco endereco) {
-        String sql1 = "CALL pr_endereco_hotel (?,?,?,?,?,?,?,?,?)";
+        String sql1 = "CALL pr_endereco_hotel (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql1);
             stmt.setString(1, hotel.getNome_hotel());
             stmt.setInt(2, hotel.getCategoria());
             stmt.setInt(3, hotel.getCidade().getId_cidade());
-            //stmt.setInt (4, hotel.getRestaurante().getId_restaurante());
-            stmt.setString(4, endereco.getTipo_logradouro());
-            stmt.setString(5, endereco.getNome_logradouro());
-            stmt.setInt(6, endereco.getNumero_endereco());
-            stmt.setString(7, endereco.getBairro());
-            stmt.setString (8, endereco.getCep());
-            stmt.setString(9, endereco.getComplemento());
+            stmt.setInt (4, hotel.getRestaurante().getId_restaurante());
+            stmt.setString(5, endereco.getTipo_logradouro());
+            stmt.setString(6, endereco.getNome_logradouro());
+            stmt.setInt(7, endereco.getNumero_endereco());
+            stmt.setString(8, endereco.getBairro());
+            stmt.setString (9, endereco.getCep());
+            stmt.setString(10, endereco.getComplemento());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Hotel cadastrado com Sucesso!");
             return true;
