@@ -30,20 +30,43 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `BDTur`.`Endereco`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `BDTur`.`Endereco` ;
+
+CREATE TABLE IF NOT EXISTS `BDTur`.`Endereco` (
+  `ID_Endereco` INT(6) NOT NULL AUTO_INCREMENT,
+  `TipoEndereco` ENUM('Hotel', 'Restaurante', 'PontoTuristico') NOT NULL,
+  `Tipo_Logradouro` ENUM('Rua', 'Avenida', 'Praça', 'Travessa') CHARACTER SET 'cp1250' NOT NULL,
+  `Nome_Logradouro` VARCHAR(45) NOT NULL,
+  `Numero_End` VARCHAR(45) NOT NULL,
+  `Bairro` VARCHAR(45) NOT NULL,
+  `CEP` VARCHAR(45) NOT NULL,
+  `Complemento` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID_Endereco`, `TipoEndereco`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `BDTur`.`Restaurante`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `BDTur`.`Restaurante` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Restaurante` (
-  `ID_Restaurante` INT(6) NOT NULL AUTO_INCREMENT,
+  `ID_Restaurante` INT(6) NOT NULL,
   `Nome_Restaurante` VARCHAR(45) NOT NULL,
   `Categoria_Restaurante` VARCHAR(10) NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
-  PRIMARY KEY (`ID_Restaurante`),
   INDEX `fk_Restaurante_Cidade1_idx` (`Cidade_ID` ASC) ,
+  PRIMARY KEY (`ID_Restaurante`),
   CONSTRAINT `fk_Restaurante_Cidade1`
     FOREIGN KEY (`Cidade_ID`)
     REFERENCES `BDTur`.`Cidade` (`ID_Cidade`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Restaurante_Endereco1`
+    FOREIGN KEY (`ID_Restaurante`)
+    REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -55,11 +78,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BDTur`.`Hotel` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Hotel` (
-  `ID_Hotel` INT(6) NOT NULL AUTO_INCREMENT,
+  `ID_Hotel` INT(6) NOT NULL,
   `Nome_Hotel` VARCHAR(45) NOT NULL,
   `Categoria_Hotel` INT(1) NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
-  `Restaurante_ID` INT(6) NOT NULL,
+  `Restaurante_ID` INT(6) NULL,
   PRIMARY KEY (`ID_Hotel`),
   INDEX `fk_Hotel_Cidade1_idx` (`Cidade_ID` ASC) ,
   INDEX `fk_Hotel_Restaurante1_idx` (`Restaurante_ID` ASC) ,
@@ -71,6 +94,11 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Hotel` (
   CONSTRAINT `fk_Hotel_Restaurante1`
     FOREIGN KEY (`Restaurante_ID`)
     REFERENCES `BDTur`.`Restaurante` (`ID_Restaurante`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Hotel_Endereco1`
+    FOREIGN KEY (`ID_Hotel`)
+    REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -102,10 +130,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BDTur`.`Ponto_Turistico` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Ponto_Turistico` (
-  `ID_PT` INT(6) NOT NULL AUTO_INCREMENT,
+  `ID_PT` INT(6) NOT NULL,
   `Nome_PT` VARCHAR(45) NOT NULL,
   `Descricao` VARCHAR(140) NULL,
-  `Tefelone` VARCHAR(14) NULL,
+  `Telefone` VARCHAR(14) NULL,
   `Tipo_PT` ENUM('Igreja', 'Museu', 'Casa de Show') NOT NULL,
   `Cidade_ID` INT(6) UNSIGNED NOT NULL,
   PRIMARY KEY (`ID_PT`),
@@ -114,38 +142,10 @@ CREATE TABLE IF NOT EXISTS `BDTur`.`Ponto_Turistico` (
     FOREIGN KEY (`Cidade_ID`)
     REFERENCES `BDTur`.`Cidade` (`ID_Cidade`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `BDTur`.`Endereco`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `BDTur`.`Endereco` ;
-
-CREATE TABLE IF NOT EXISTS `BDTur`.`Endereco` (
-  `ID_Endereco` INT(6) NOT NULL,
-  `TipoEndereco` ENUM('Hotel', 'Restaurante', 'PontoTuristico') NOT NULL,
-  `Tipo_Logradouro` ENUM('Rua', 'Avenida', 'Praça', 'Travessa') CHARACTER SET 'cp1250' NOT NULL,
-  `Nome_Logradouro` VARCHAR(45) NOT NULL,
-  `Numero_End` VARCHAR(45) NOT NULL,
-  `Bairro` VARCHAR(45) NOT NULL,
-  `CEP` VARCHAR(45) NOT NULL,
-  `Complemento` VARCHAR(45) NULL,
-  PRIMARY KEY (`ID_Endereco`, `TipoEndereco`),
-  CONSTRAINT `fk_Endereco_Ponto_Turistico1`
-    FOREIGN KEY (`ID_Endereco`)
-    REFERENCES `BDTur`.`Ponto_Turistico` (`ID_PT`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Endereco_Restaurante1`
-    FOREIGN KEY (`ID_Endereco`)
-    REFERENCES `BDTur`.`Restaurante` (`ID_Restaurante`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Endereco_Hotel1`
-    FOREIGN KEY (`ID_Endereco`)
-    REFERENCES `BDTur`.`Hotel` (`ID_Hotel`)
+  CONSTRAINT `fk_Ponto_Turistico_Endereco1`
+    FOREIGN KEY (`ID_PT`)
+    REFERENCES `BDTur`.`Endereco` (`ID_Endereco`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -158,7 +158,7 @@ DROP TABLE IF EXISTS `BDTur`.`Igreja` ;
 
 CREATE TABLE IF NOT EXISTS `BDTur`.`Igreja` (
   `PT_ID` INT(6) NOT NULL,
-  `Data_Funcadacao` DATE NOT NULL,
+  `Data_Fundacao` DATE NOT NULL,
   `Estilo` VARCHAR(45) NOT NULL,
   INDEX `fk_Igreja_Ponto_Turistico1_idx` (`PT_ID` ASC) ,
   PRIMARY KEY (`PT_ID`),
@@ -290,7 +290,47 @@ USE `BDTur`;
 INSERT INTO `BDTur`.`Cidade` (`ID_Cidade`, `Nome_cidade`, `UF`, `Populacao`) VALUES (01, 'Sobral', 'CE', 147353);
 INSERT INTO `BDTur`.`Cidade` (`ID_Cidade`, `Nome_cidade`, `UF`, `Populacao`) VALUES (02, 'Fortaleza', 'CE', 2643000);
 INSERT INTO `BDTur`.`Cidade` (`ID_Cidade`, `Nome_cidade`, `UF`, `Populacao`) VALUES (03, 'Rio de Janeiro', 'RJ', 6320000);
-INSERT INTO `BDTur`.`Cidade` (`ID_Cidade`, `Nome_cidade`, `UF`, `Populacao`) VALUES (04, 'Exemplo', 'AA', 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `BDTur`.`Endereco`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `BDTur`;
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (101, DEFAULT, 'Rua', 'Rua Jornalista Barreto', '274', 'Centro', '62011-172', 'Em frente ao Museu Dom José');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (102, DEFAULT, 'Rua', 'Rua Margem Esquerda', '1', 'Centro', '62128-030', 'Margem Esquerda');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (103, DEFAULT, 'Rua', 'Rua Dona Maria Tomasia', '355', 'Boulevard do Arco', '62011-230', 'Boulevard do Arco');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (104, DEFAULT, 'Avenida', 'Av. Atlântica', '1702', 'Copacabana', '22021-001', 'Praia de Copacabana');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (105, DEFAULT, 'Avenida', 'Av. Bartolomeu Mitre', '385', 'Leblon', '22431-003', 'Praia do Leblon');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (106, DEFAULT, 'Rua', 'Rua República da Armênia', '1154', 'Parque Manibum', '60831-760', 'Zona Sul');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (107, DEFAULT, 'Avenida', 'Av. José Aluísio Pinto', '300', 'Dom Expedito', '62050-255', 'Ao lado Shopping Sobral');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (108, DEFAULT, 'Avenida', 'Av. Beira-Mar', '3130', 'Meirelles', '60165-211', 'Beira-Mar');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (109, DEFAULT, 'Avenida', 'Av. Zé Diogo', '4945', 'Praia do Futuro', '60180-005', 'Praia do Futuro');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (110, DEFAULT, 'Rua', 'Rua Dona Maria Tomásia', '375', 'Santa Rita', '62011-230', 'Próximo ao Posto');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (111, DEFAULT, 'Praça', 'Cidade do Rock', '1', 'Parque Olímpico', '22030-081', 'Parque Olímpico');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (112, DEFAULT, 'Avenida', 'Av. Almirante Josegua', '386', 'Dona Monica', '62011-172', 'Ao lado da Praça Santa Quitéria');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (201, DEFAULT, 'Rua', 'Rua Visconde de Mauá', '185', 'Meireles', '60125-160', 'Próximo ao Shopping Parangaba');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (202, DEFAULT, 'Rua', 'Rua Duputado João Adeodato', '721', 'Centro', '62010-467', 'Próximo a Rodoviária');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (203, DEFAULT, 'Rua', 'Rua Duputado João Adeodato', '619', 'Centro', '62010-450', 'Rua Duputado João Adeodato');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (204, DEFAULT, 'Avenida', 'Av. José Aluísio Pinto', '300', 'Dom Expedito', '62050-255', 'Ao lado Shopping Sobral');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (205, DEFAULT, 'Avenida', 'Av. Atlântica', '1702', 'Copacabana', '22021-001', 'Praia de Copacabana');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (206, DEFAULT, 'Rua', 'Rua Tapirá', '284', 'Centro', '13320-030', 'Próxima a Igreja das Dores');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (207, DEFAULT, 'Avenida', 'Av. Almirante Barroso', '885', 'Centro', '60741-900', 'Praia de Iracema ');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (208, DEFAULT, 'Avenida', 'Av. Bartolomeu Mitre', '385', 'Leblon', '22431-003', 'Praia do Leblon');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (209, DEFAULT, 'Rua', 'Rua Praça da Sé', '22', 'Centro', '20020-210', 'Praça da Sé');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (210, DEFAULT, 'Avenida', 'Av. Beira-Mar', '3130', 'Meirelles', '60165-211', 'Beira-Mar');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (501, DEFAULT, 'Rua', 'Dona Maria Tomásia', '375', 'Santa Rita', '62011-230', 'Próximo ao Posto');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (502, DEFAULT, 'Avenida', 'Almirante Josegua', '386', 'Dona Monica', '62011-172', 'Ao lado da Praça Santa Quitéria');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (503, DEFAULT, 'Praça', 'Cidade do Rock', '1', 'Parque Olímpico', '22030-081', 'Parque Olímpico');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (504, DEFAULT, 'Avenida', 'Dom José', '878', 'Centro', '62015-400', 'Próximo ao Teatro São João');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (505, DEFAULT, 'Praça', 'Mauá', '1', 'Centro', '20081-262', 'Praça Mauá');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (506, DEFAULT, 'Rua', 'Dragão do Mar', '81', 'Centro', '60060-172', 'Dragão do Mar');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (507, DEFAULT, 'Rua', 'Galdino Goldin', '52', 'Centro', '62010-180', 'Em frente a camara dos vereadores');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (509, DEFAULT, 'Praça', 'da Sé', '1', 'Centro', '60055-150', 'Praça da Sé');
+INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (508, DEFAULT, 'Praça', 'da Candelária', '1', 'Candelária', '20829-920', ' -');
+
 COMMIT;
 
 
@@ -298,7 +338,7 @@ COMMIT;
 -- Data for table `BDTur`.`Restaurante`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `BDTur`;INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome_Restaurante`, `Categoria_Restaurante`, `Cidade_ID`) VALUES (100, '-', '-', 4);
+USE `BDTur`;
 INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome_Restaurante`, `Categoria_Restaurante`, `Cidade_ID`) VALUES (101, 'Cicero\'s', 'Super-Luxo', 1);
 INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome_Restaurante`, `Categoria_Restaurante`, `Cidade_ID`) VALUES (102, 'Delicia.com', 'Simples', 1);
 INSERT INTO `BDTur`.`Restaurante` (`ID_Restaurante`, `Nome_Restaurante`, `Categoria_Restaurante`, `Cidade_ID`) VALUES (103, 'Tako Sushi', 'Luxo', 1);
@@ -320,15 +360,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (201, 'Visconti', 3, 01, 100);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (202, 'Beira-Rio', 4, 01, 100);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (203, 'Hugo Plaza', 2, 01, 100);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (201, 'Visconti', 3, 01, NULL);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (202, 'Beira-Rio', 4, 01, NULL);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (203, 'Hugo Plaza', 2, 01, NULL);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (204, 'Tulipp Inn', 5, 01, 107);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (205, 'Copacabana Palace', 5, 03, 104);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (206, 'Casa da Tia', 2, 02, 100);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (207, 'Iracema', 4, 02, 100);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (206, 'Casa da Tia', 2, 02, NULL);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (207, 'Iracema', 4, 02, NULL);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (208, 'Leblon Palace', 5, 03, 105);
-INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (209, 'Meu Cantinho Pelourinho', 3, 03, 100);
+INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (209, 'Meu Cantinho Pelourinho', 3, 03, NULL);
 INSERT INTO `BDTur`.`Hotel` (`ID_Hotel`, `Nome_Hotel`, `Categoria_Hotel`, `Cidade_ID`, `Restaurante_ID`) VALUES (210, 'Beira-Mar Hotel', 4, 02, 108);
 
 COMMIT;
@@ -398,55 +438,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (501, 'Sobrado335', 'Bar', '88 99625-7682', 'Casa de Show', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (502, 'Lancelot', 'Bar', '85 99901-0413', 'Casa de Show', 02);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (503, 'Rock in Rio', 'Espaço Cultural', '21 2233-5379', 'Casa de Show', 03);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (504, 'Museu Dom José', 'Cultura', '88 3611-3525', 'Museu', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (505, 'Museu do Amanhã', 'Cultura', '21 2233-0721', 'Museu', 03);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (506, 'Museu Dragão do Mar', 'Cultura', '85 3488-8600', 'Museu', 02);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (507, 'Igreja da Sé', 'Cultura', '88 3611-0848', 'Igreja', 01);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (508, 'Igreja da Candelaria', 'Cultura', '21 2233-2324', 'Igreja', 03);
-INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Tefelone`, `Tipo_PT`, `Cidade_ID`) VALUES (509, 'Catedral Metropolitana de Fortaleza', 'Cultura', '85 3231-4196', 'Igreja', 02);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `BDTur`.`Endereco`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `BDTur`;
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (101, DEFAULT, 'Rua', 'Rua Jornalista Barreto', '274', 'Centro', '62011-172', 'Em frente ao Museu Dom José');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (102, DEFAULT, 'Rua', 'Rua Margem Esquerda', '1', 'Centro', '62128-030', 'Margem Esquerda');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (103, DEFAULT, 'Rua', 'Rua Dona Maria Tomasia', '355', 'Boulevard do Arco', '62011-230', 'Boulevard do Arco');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (104, DEFAULT, 'Avenida', 'Av. Atlântica', '1702', 'Copacabana', '22021-001', 'Praia de Copacabana');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (105, DEFAULT, 'Avenida', 'Av. Bartolomeu Mitre', '385', 'Leblon', '22431-003', 'Praia do Leblon');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (106, DEFAULT, 'Rua', 'Rua República da Armênia', '1154', 'Parque Manibum', '60831-760', 'Zona Sul');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (107, DEFAULT, 'Avenida', 'Av. José Aluísio Pinto', '300', 'Dom Expedito', '62050-255', 'Ao lado Shopping Sobral');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (108, DEFAULT, 'Avenida', 'Av. Beira-Mar', '3130', 'Meirelles', '60165-211', 'Beira-Mar');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (109, DEFAULT, 'Avenida', 'Av. Zé Diogo', '4945', 'Praia do Futuro', '60180-005', 'Praia do Futuro');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (110, DEFAULT, 'Rua', 'Rua Dona Maria Tomásia', '375', 'Santa Rita', '62011-230', 'Próximo ao Posto');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (111, DEFAULT, 'Praça', 'Cidade do Rock', '1', 'Parque Olímpico', '22030-081', 'Parque Olímpico');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (112, DEFAULT, 'Avenida', 'Av. Almirante Josegua', '386', 'Dona Monica', '62011-172', 'Ao lado da Praça Santa Quitéria');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (201, DEFAULT, 'Rua', 'Rua Visconde de Mauá', '185', 'Meireles', '60125-160', 'Próximo ao Shopping Parangaba');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (202, DEFAULT, 'Rua', 'Rua Duputado João Adeodato', '721', 'Centro', '62010-467', 'Próximo a Rodoviária');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (203, DEFAULT, 'Rua', 'Rua Duputado João Adeodato', '619', 'Centro', '62010-450', 'Rua Duputado João Adeodato');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (204, DEFAULT, 'Avenida', 'Av. José Aluísio Pinto', '300', 'Dom Expedito', '62050-255', 'Ao lado Shopping Sobral');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (205, DEFAULT, 'Avenida', 'Av. Atlântica', '1702', 'Copacabana', '22021-001', 'Praia de Copacabana');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (206, DEFAULT, 'Rua', 'Rua Tapirá', '284', 'Centro', '13320-030', 'Próxima a Igreja das Dores');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (207, DEFAULT, 'Avenida', 'Av. Almirante Barroso', '885', 'Centro', '60741-900', 'Praia de Iracema ');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (208, DEFAULT, 'Avenida', 'Av. Bartolomeu Mitre', '385', 'Leblon', '22431-003', 'Praia do Leblon');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (209, DEFAULT, 'Rua', 'Rua Praça da Sé', '22', 'Centro', '20020-210', 'Praça da Sé');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (210, DEFAULT, 'Avenida', 'Av. Beira-Mar', '3130', 'Meirelles', '60165-211', 'Beira-Mar');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (501, DEFAULT, 'Rua', 'Dona Maria Tomásia', '375', 'Santa Rita', '62011-230', 'Próximo ao Posto');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (502, DEFAULT, 'Avenida', 'Almirante Josegua', '386', 'Dona Monica', '62011-172', 'Ao lado da Praça Santa Quitéria');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (503, DEFAULT, 'Praça', 'Cidade do Rock', '1', 'Parque Olímpico', '22030-081', 'Parque Olímpico');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (504, DEFAULT, 'Avenida', 'Dom José', '878', 'Centro', '62015-400', 'Próximo ao Teatro São João');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (505, DEFAULT, 'Praça', 'Mauá', '1', 'Centro', '20081-262', 'Praça Mauá');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (506, DEFAULT, 'Rua', 'Dragão do Mar', '81', 'Centro', '60060-172', 'Dragão do Mar');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (507, DEFAULT, 'Rua', 'Galdino Goldin', '52', 'Centro', '62010-180', 'Em frente a camara dos vereadores');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (509, DEFAULT, 'Praça', 'da Sé', '1', 'Centro', '60055-150', 'Praça da Sé');
-INSERT INTO `BDTur`.`Endereco` (`ID_Endereco`, `TipoEndereco`, `Tipo_Logradouro`, `Nome_Logradouro`, `Numero_End`, `Bairro`, `CEP`, `Complemento`) VALUES (508, DEFAULT, 'Praça', 'da Candelária', '1', 'Candelária', '20829-920', ' -');
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (501, 'Sobrado335', 'Bar', '88 99625-7682', 'Casa de Show', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (502, 'Lancelot', 'Bar', '85 99901-0413', 'Casa de Show', 02);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (503, 'Rock in Rio', 'Espaço Cultural', '21 2233-5379', 'Casa de Show', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (504, 'Museu Dom José', 'Cultura', '88 3611-3525', 'Museu', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (505, 'Museu do Amanhã', 'Cultura', '21 2233-0721', 'Museu', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (506, 'Museu Dragão do Mar', 'Cultura', '85 3488-8600', 'Museu', 02);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (507, 'Igreja da Sé', 'Cultura', '88 3611-0848', 'Igreja', 01);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (508, 'Igreja da Candelaria', 'Cultura', '21 2233-2324', 'Igreja', 03);
+INSERT INTO `BDTur`.`Ponto_Turistico` (`ID_PT`, `Nome_PT`, `Descricao`, `Telefone`, `Tipo_PT`, `Cidade_ID`) VALUES (509, 'Catedral Metropolitana de Fortaleza', 'Cultura', '85 3231-4196', 'Igreja', 02);
 
 COMMIT;
 
@@ -456,9 +456,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `BDTur`;
-INSERT INTO `BDTur`.`Igreja` (`PT_ID`, `Data_Funcadacao`, `Estilo`) VALUES (507, '1778-03-27', 'Rococó');
-INSERT INTO `BDTur`.`Igreja` (`PT_ID`, `Data_Funcadacao`, `Estilo`) VALUES (508, '1811-11-02', 'Arquitetura Neoclássica');
-INSERT INTO `BDTur`.`Igreja` (`PT_ID`, `Data_Funcadacao`, `Estilo`) VALUES (509, '1978-05-19', 'Neogótico');
+INSERT INTO `BDTur`.`Igreja` (`PT_ID`, `Data_Fundacao`, `Estilo`) VALUES (507, '1778-03-27', 'Rococó');
+INSERT INTO `BDTur`.`Igreja` (`PT_ID`, `Data_Fundacao`, `Estilo`) VALUES (508, '1811-11-02', 'Arquitetura Neoclássica');
+INSERT INTO `BDTur`.`Igreja` (`PT_ID`, `Data_Fundacao`, `Estilo`) VALUES (509, '1978-05-19', 'Neogótico');
 
 COMMIT;
 
@@ -533,37 +533,3 @@ COMMIT;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-delimiter $$;
-
-
-CREATE PROCEDURE `pr_endereco_hotel`(new_nome_hotel varchar(45), new_categoria_hotel int(1), new_cidade_id int(6), new_restaurante_id int(6), new_tipo_logradouro varchar (10), new_nome_logradouro varchar (45), new_numero_end int, new_bairro varchar (45), new_cep varchar (13), new_complemento varchar(140))
-begin
-
-	declare id_novohotel int;
-
-	insert into hotel (nome_hotel, categoria_hotel, cidade_id, restaurante_id) values (new_nome_hotel, new_categoria_hotel, new_cidade_id, new_restaurante_id);
-    
-    set id_novohotel = last_insert_id();
-    
-    insert into endereco (id_endereco, tipoendereco, tipo_logradouro, nome_logradouro, numero_end, bairro, cep, complemento)
-    values (id_novohotel, 'Hotel', new_tipo_logradouro, new_nome_logradouro, new_numero_end, new_bairro, new_cep, new_complemento);
-end $$;
-delimiter ;
-
-delimiter $$;
-
-
-CREATE PROCEDURE `pr_endereco_pt`(new_nome_pt varchar (45), new_descricao varchar (140), new_telefone varchar(14), new_tipo_pt enum ('Igreja','Muser', 'Casa de Show'), new_cidade_id int (6), new_tipo_logradouro varchar (10), new_nome_logradouro varchar (45), new_numero_end int, new_bairro varchar (45), new_cep varchar (13), new_complemento varchar(140))
-begin
-
-	declare id_novopt int;
-
-	insert into hotel (nome_pt, descricao, telefone, tipo_pt) values (new_nome_pt, new_descricao, new_telefone, new_tipo_pt, new_cidade_id);
-    
-    set id_novopt = last_insert_id();
-    
-    insert into endereco (id_endereco, tipoendereco, tipo_logradouro, nome_logradouro, numero_end, bairro, cep, complemento)
-    values (id_novopt, '', new_tipo_logradouro, new_nome_logradouro, new_numero_end, new_bairro, new_cep, new_complemento);
-end $$;
-delimiter ;

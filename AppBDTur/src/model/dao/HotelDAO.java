@@ -32,7 +32,7 @@ public class HotelDAO {
     
   
     public boolean createHotel(Hotel hotel, Endereco endereco) {
-        String sql1 = "CALL pr_endereco_hotel (?,?,?,?,?,?,?,?,?,?)";
+        String sql1 = "CALL pr_insere_hotel (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql1);
