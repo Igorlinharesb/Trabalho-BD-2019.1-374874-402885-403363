@@ -28,36 +28,136 @@ public class TelaPrincipalSDI extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu8 = new javax.swing.JMenu();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jInternalFrameBemVindo = new javax.swing.JInternalFrame();
+        jPanelInternalFrame = new javax.swing.JPanel();
+        jButtonCadastraRestaurante = new javax.swing.JButton();
+        jButtonCadastraCidade = new javax.swing.JButton();
+        jButtonCadastraPontoTurtístico = new javax.swing.JButton();
+        jButtonCadastraaHotel = new javax.swing.JButton();
+        jButtonConsultaCidade = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelCadastros = new javax.swing.JLabel();
+        jLabelImagem = new javax.swing.JLabel();
+        jLabelSistemaDeGerenciamento = new javax.swing.JLabel();
+        jButtonFecharBemVindo = new javax.swing.JButton();
+        jLabelTelaPrincipalSDI = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuNovo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuConsultar = new javax.swing.JMenu();
+        jMenuItemConsultaCidade = new javax.swing.JMenuItem();
+        jMenuFerramentas = new javax.swing.JMenu();
+        jMenuItemBemVindo = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenu();
+        jMenuItemSair = new javax.swing.JMenuItem();
 
         jMenu8.setText("jMenu8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BDTur - Sistema de Agência de Turismo");
+        getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
+        jInternalFrameBemVindo.setTitle("Bem-Vindo");
+        jInternalFrameBemVindo.setVisible(true);
+        jInternalFrameBemVindo.getContentPane().setLayout(null);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/add.png"))); // NOI18N
-        jMenu1.setText("Novo");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        jPanelInternalFrame.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelInternalFrame.setLayout(null);
+
+        jButtonCadastraRestaurante.setText("Restaurante");
+        jButtonCadastraRestaurante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                jButtonCadastraRestauranteActionPerformed(evt);
+            }
+        });
+        jPanelInternalFrame.add(jButtonCadastraRestaurante);
+        jButtonCadastraRestaurante.setBounds(130, 140, 110, 60);
+
+        jButtonCadastraCidade.setText("Cidade");
+        jButtonCadastraCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastraCidadeActionPerformed(evt);
+            }
+        });
+        jPanelInternalFrame.add(jButtonCadastraCidade);
+        jButtonCadastraCidade.setBounds(10, 60, 100, 60);
+
+        jButtonCadastraPontoTurtístico.setText("Ponto Turístico");
+        jButtonCadastraPontoTurtístico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastraPontoTurtísticoActionPerformed(evt);
+            }
+        });
+        jPanelInternalFrame.add(jButtonCadastraPontoTurtístico);
+        jButtonCadastraPontoTurtístico.setBounds(130, 60, 110, 60);
+
+        jButtonCadastraaHotel.setText("Hotel");
+        jButtonCadastraaHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastraaHotelActionPerformed(evt);
+            }
+        });
+        jPanelInternalFrame.add(jButtonCadastraaHotel);
+        jButtonCadastraaHotel.setBounds(10, 140, 100, 60);
+
+        jButtonConsultaCidade.setText("Cidade");
+        jButtonConsultaCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultaCidadeActionPerformed(evt);
+            }
+        });
+        jPanelInternalFrame.add(jButtonConsultaCidade);
+        jButtonConsultaCidade.setBounds(410, 60, 110, 60);
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("Consultas:");
+        jPanelInternalFrame.add(jLabel1);
+        jLabel1.setBounds(410, 10, 170, 40);
+
+        jLabelCadastros.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabelCadastros.setForeground(new java.awt.Color(3, 3, 3));
+        jLabelCadastros.setText("Cadastros:");
+        jPanelInternalFrame.add(jLabelCadastros);
+        jLabelCadastros.setBounds(20, 10, 120, 40);
+
+        jLabelImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/engrenages.jpg"))); // NOI18N
+        jPanelInternalFrame.add(jLabelImagem);
+        jLabelImagem.setBounds(2, 2, 851, 463);
+
+        jInternalFrameBemVindo.getContentPane().add(jPanelInternalFrame);
+        jPanelInternalFrame.setBounds(0, 30, 700, 210);
+
+        jLabelSistemaDeGerenciamento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabelSistemaDeGerenciamento.setText("Sistema de Gerenciamento:");
+        jInternalFrameBemVindo.getContentPane().add(jLabelSistemaDeGerenciamento);
+        jLabelSistemaDeGerenciamento.setBounds(10, 10, 180, 20);
+
+        jButtonFecharBemVindo.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jButtonFecharBemVindo.setText("X");
+        jButtonFecharBemVindo.setToolTipText("Fechar Tela Bem Vindo");
+        jButtonFecharBemVindo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharBemVindoActionPerformed(evt);
+            }
+        });
+        jInternalFrameBemVindo.getContentPane().add(jButtonFecharBemVindo);
+        jButtonFecharBemVindo.setBounds(660, 0, 43, 27);
+
+        getContentPane().add(jInternalFrameBemVindo);
+        jInternalFrameBemVindo.setBounds(0, 40, 720, 270);
+
+        jLabelTelaPrincipalSDI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/fundoprincipal.jpg"))); // NOI18N
+        getContentPane().add(jLabelTelaPrincipalSDI);
+        jLabelTelaPrincipalSDI.setBounds(0, 0, 720, 310);
+
+        jMenuNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/add.png"))); // NOI18N
+        jMenuNovo.setText("Novo");
+        jMenuNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuNovoActionPerformed(evt);
             }
         });
 
@@ -67,7 +167,7 @@ public class TelaPrincipalSDI extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuNovo.add(jMenuItem1);
 
         jMenuItem2.setText("Hotel");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,50 +175,102 @@ public class TelaPrincipalSDI extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenuNovo.add(jMenuItem2);
 
         jMenuItem3.setText("Ponto Turístico");
-        jMenu1.add(jMenuItem3);
+        jMenuNovo.add(jMenuItem3);
 
         jMenuItem4.setText("Restaurante");
-        jMenu1.add(jMenuItem4);
+        jMenuNovo.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuNovo);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/find.png"))); // NOI18N
-        jMenu2.setText("Consultar");
-        jMenuBar1.add(jMenu2);
+        jMenuConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/find.png"))); // NOI18N
+        jMenuConsultar.setText("Consultar");
+
+        jMenuItemConsultaCidade.setText("Cidade");
+        jMenuConsultar.add(jMenuItemConsultaCidade);
+
+        jMenuBar1.add(jMenuConsultar);
+
+        jMenuFerramentas.setText("Ferramentas");
+
+        jMenuItemBemVindo.setText("Tela Bem-Vindo");
+        jMenuItemBemVindo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBemVindoActionPerformed(evt);
+            }
+        });
+        jMenuFerramentas.add(jMenuItemBemVindo);
+
+        jMenuBar1.add(jMenuFerramentas);
+
+        jMenuSair.setText("Sair");
+
+        jMenuItemSair.setText("Sair");
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairActionPerformed(evt);
+            }
+        });
+        jMenuSair.add(jMenuItemSair);
+
+        jMenuBar1.add(jMenuSair);
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-
-        pack();
+        setSize(new java.awt.Dimension(736, 369));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    private void jMenuItemBemVindoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBemVindoActionPerformed
+       TelaPrincipalSDI tela = new TelaPrincipalSDI();
+       tela.setVisible(true);
+       dispose();
+    }//GEN-LAST:event_jMenuItemBemVindoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
-        new CadastroCidade().setVisible(true);
-        
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jMenuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoActionPerformed
+
+    }//GEN-LAST:event_jMenuNovoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         new CadastroHotel().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        new CadastroCidade().setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButtonCadastraPontoTurtísticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraPontoTurtísticoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCadastraPontoTurtísticoActionPerformed
+
+    private void jButtonFecharBemVindoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharBemVindoActionPerformed
+        jInternalFrameBemVindo.dispose();
+    }//GEN-LAST:event_jButtonFecharBemVindoActionPerformed
+
+    private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jButtonCadastraCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraCidadeActionPerformed
+        new CadastroCidade().setVisible(true);
+       
+    }//GEN-LAST:event_jButtonCadastraCidadeActionPerformed
+
+    private void jButtonConsultaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultaCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonConsultaCidadeActionPerformed
+
+    private void jButtonCadastraaHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraaHotelActionPerformed
+        new CadastroHotel().setVisible(true);
+    }//GEN-LAST:event_jButtonCadastraaHotelActionPerformed
+
+    private void jButtonCadastraRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraRestauranteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCadastraRestauranteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +305,14 @@ public class TelaPrincipalSDI extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -163,14 +323,31 @@ public class TelaPrincipalSDI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JButton jButtonCadastraCidade;
+    private javax.swing.JButton jButtonCadastraPontoTurtístico;
+    private javax.swing.JButton jButtonCadastraRestaurante;
+    private javax.swing.JButton jButtonCadastraaHotel;
+    private javax.swing.JButton jButtonConsultaCidade;
+    private javax.swing.JButton jButtonFecharBemVindo;
+    private javax.swing.JInternalFrame jInternalFrameBemVindo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelCadastros;
+    private javax.swing.JLabel jLabelImagem;
+    private javax.swing.JLabel jLabelSistemaDeGerenciamento;
+    private javax.swing.JLabel jLabelTelaPrincipalSDI;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuConsultar;
+    private javax.swing.JMenu jMenuFerramentas;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemBemVindo;
+    private javax.swing.JMenuItem jMenuItemConsultaCidade;
+    private javax.swing.JMenuItem jMenuItemSair;
+    private javax.swing.JMenu jMenuNovo;
+    private javax.swing.JMenu jMenuSair;
+    private javax.swing.JPanel jPanelInternalFrame;
     // End of variables declaration//GEN-END:variables
 }
