@@ -242,9 +242,10 @@ public class CadastroHotel extends javax.swing.JFrame {
         
         //Instanciando um novo objeto restaurante
         Restaurante restaurante_hotel = new Restaurante();
-        restaurante_hotel.setId_restaurante(Integer.parseInt(id_cidade.getText()));
         
-
+        if (id_restaurante.getText()!= null){
+            restaurante_hotel.setId_restaurante(Integer.parseInt(id_restaurante.getText()));
+        }
         //Preenchendo o Hotel
         Hotel hotel = new Hotel ();
         hotel.setNome_hotel(nome_hotel.getText());
