@@ -10,50 +10,44 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.bean.Endereco;
+import model.bean.Casa_de_Show;
 import model.bean.Ponto_Turistico;
 
 /**
  *
  * @author IgorL
  */
-public class PontoTuristicoDAO {
+public class Ponto_TuristicoDAO {
     private Connection con = null;
 
-    public PontoTuristicoDAO() {
+    public Ponto_TuristicoDAO() {
         try {
             con = ConnectionFactory.getConnection();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados: "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados: " + ex);
         }
     }
     
-  
-    public boolean createPT(Ponto_Turistico pt, Endereco endereco) {
-        String sql1 = "CALL pr_endereco_pt (?,?,?,?,?,?,?,?,?,?,?)";
+    public boolean updatePT(Ponto_Turistico pt) {
+        String sql1 = "UPDATE Ponto_Turistico SET nome_PT = ?, descricao = ?, telefone = ?, tipo_pt = ?, cidade_ID = ? WHERE  ID_PT = ?";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql1);
             stmt.setString(1, pt.getNome_pt());
             stmt.setString(2, pt.getDescricao());
             stmt.setString(3, pt.getTelefone());
-            stmt.setString (4, pt.getTipo_pt());
-            stmt.setInt (5, pt.getCidade().getId_cidade());
-            stmt.setString(6, endereco.getTipo_logradouro());
-            stmt.setString(7, endereco.getNome_logradouro());
-            stmt.setInt(8, endereco.getNumero_endereco());
-            stmt.setString(9, endereco.getBairro());
-            stmt.setString (10, endereco.getCep());
-            stmt.setString(11, endereco.getComplemento());
+            stmt.setString(4, pt.getTipo_pt());
+            stmt.setInt(5, pt.getCidade().getId_cidade());
+            stmt.setInt(6, pt.getId_pt());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Ponto Turístico cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Ponto Turístico atualizado com Sucesso!");
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar Ponto Turistico: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Ponto Turístico: " + ex);
             return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+
     }
-    
 }

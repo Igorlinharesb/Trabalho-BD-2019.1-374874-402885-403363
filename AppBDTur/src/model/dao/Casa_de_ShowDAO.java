@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import model.bean.Casa_de_Show;
 import model.bean.Endereco;
 import model.bean.Igreja;
 import model.bean.Ponto_Turistico;
@@ -18,11 +19,11 @@ import model.bean.Ponto_Turistico;
  *
  * @author IgorL
  */
-public class IgrejaDAO {
-
+public class Casa_de_ShowDAO {
+    
     private Connection con = null;
 
-    public IgrejaDAO() {
+    public Casa_de_ShowDAO() {
 
         try {
             con = ConnectionFactory.getConnection();
@@ -31,8 +32,8 @@ public class IgrejaDAO {
         }
     }
 
-    public boolean createIgreja(Igreja igreja, Ponto_Turistico pt, Endereco endereco) {
-        String sql1 = "CALL pr_insere_igreja (?,?,?,?,?,?,?,?,?,?,?,?)";
+    public boolean createCS(Casa_de_Show cs, Ponto_Turistico pt, Endereco endereco) {
+        String sql1 = "CALL pr_insere_casadeshow (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql1);
@@ -46,38 +47,44 @@ public class IgrejaDAO {
             stmt.setString(8, endereco.getBairro());
             stmt.setString(9, endereco.getCep());
             stmt.setString(10, endereco.getComplemento());
-            stmt.setString(11, igreja.getData_fundacao());
-            stmt.setString(12, igreja.getEstilo());
+            stmt.setString(11, cs.getHora_inicio());
+            stmt.setString(12, cs.getDia_fechamento());
+            stmt.setDouble(13, cs.getPreco_medio_rest());
+            stmt.setString(14, cs.getEspecialidade_rest());
+            stmt.setInt(15, cs.getRestaurante().getId_restaurante());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Igreja cadastrada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Casa de Show cadastrada com Sucesso!");
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar Igreja: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar Casa de Show: " + ex);
             return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
 
     }
-
-    public boolean updateIgreja(Igreja igreja, Ponto_Turistico pt) {
-        String sql1 = "UPDATE Igreja SET data_fundacao = ?, estilo = ? WHERE pt_id = ?";
+    
+    public boolean updateCS(Casa_de_Show cs, Ponto_Turistico pt) {
+        String sql1 = "UPDATE Casa_de_Show SET horario_inicio = ?, dia_de_fechamento = ?, preco_medio_rest = ?, especialidade_rest = ?, restaurante_ID = ? WHERE PT_ID = ?";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql1);
-            stmt.setString(1, igreja.getData_fundacao());
-            stmt.setString(2, igreja.getEstilo());
-            stmt.setInt(3, pt.getId_pt());
+            stmt.setString(1, cs.getHora_inicio());
+            stmt.setString(2, cs.getDia_fechamento());
+            stmt.setDouble(3, cs.getPreco_medio_rest());
+            stmt.setString(4, cs.getEspecialidade_rest());
+            stmt.setInt(5, cs.getRestaurante().getId_restaurante());
+            stmt.setInt(6, pt.getId_pt());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Igreja atualizada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Casa de Show atualizada com Sucesso!");
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar Igreja: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Casa de Show: " + ex);
             return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
 
     }
-
+    
 }
